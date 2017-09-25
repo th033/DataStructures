@@ -96,13 +96,13 @@ public class Main extends javax.swing.JFrame {
      * **************************
      */
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-    String find=txtFind.toString();
+ //   String find=txtFind.toString();
     for(int i=0;i<500;i++)
         {
             addLink(rand.nextInt());
         }
     //for some reason the program makes it to this point then then stops before 
-    int locate=Integer.parseInt(find);
+    int locate=Integer.parseInt(txtFind.getText());
     //this point...going step by step it never makes it to my search method.
     search(locate);
 
