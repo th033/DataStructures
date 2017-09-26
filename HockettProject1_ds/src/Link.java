@@ -26,6 +26,11 @@ public class Link
     public Link nextLink;
     public Link first;
     public Link last;
+    public Link()
+    {
+        first=null;
+        last=null;
+    }
      /**
      * Method Name: push
      * Method Author: Tyler Hockett
