@@ -140,14 +140,14 @@ public class Tree234
         
         if(cur.isLeaf()){
             for(int i = 0; i < cur.getNumItems(); i++){
-                tempString+="Word: " + cur.getItem(i).getDData() + "\t\t\tCount: " + cur.getItem(i).getCount();
+                tempString+="Word: " + cur.getItem(i).getDData() + "\t\t\tCount: " + cur.getItem(i).getCount()+"\n";
             }
         }
         else{
             for(int i = 0; i < cur.getNumItems() + 1; i++){
                 recPrintOut(cur.getChild(i));
                 if(i < cur.getNumItems()){
-                  tempString+="Word: " + cur.getItem(i).getDData() + "\t\t\tCount: " + cur.getItem(i).getCount();  
+                  tempString+="Word: " + cur.getItem(i).getDData() + "\t\t\tCount: " + cur.getItem(i).getCount()+"\n";  
                 }
             }
         }

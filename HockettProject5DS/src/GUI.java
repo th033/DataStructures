@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 /**
@@ -33,6 +34,7 @@ public class GUI extends javax.swing.JFrame {
     File myFile;
     BufferedReader buff;
     String toSeperate="";
+    Scanner scan;
     public GUI() {
         initComponents();
     }
@@ -157,17 +159,20 @@ public class GUI extends javax.swing.JFrame {
         
         try {
             myFile=fcLoad.getSelectedFile();
-            read = new FileReader(myFile);
-            buff= new BufferedReader(read);
+            
+            //read = new FileReader(myFile);
+            scan = new Scanner(new File(myFile,toSeperate));
+            //buff= new BufferedReader(read);
             toLadder();
+            
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
-            try {
-                read.close();
-            } catch (IOException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                read.close();
+//            } catch (IOException ex) {
+//                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
         
     }//GEN-LAST:event_fcLoadActionPerformed
@@ -187,7 +192,7 @@ public class GUI extends javax.swing.JFrame {
 //        if (myTree.find(newStr) == -1){
 //                myTree.insert(newStr);   
 //            }
-        if(myLadder.find(stripPunctuation(txtAdd.getText()))!=-1)
+        if(myLadder.find(stripPunctuation(txtAdd.getText()))==-1)
         {
         myLadder.insert(stripPunctuation(txtAdd.getText()));        // TODO add your handling code here:
         }
@@ -206,25 +211,19 @@ public class GUI extends javax.swing.JFrame {
      */
     public void toLadder()
     {
-        try 
+        do 
         {
-            do
+            toSeperate=scan.next();
+            //String[] Words = toSeperate.split("\\s+");
+            //for(int i=0; i<Words.length;i++)
+            //{
+            if(myLadder.find(stripPunctuation(toSeperate))==-1)
             {
-            toSeperate=buff.readLine();
-            String[] Words = toSeperate.split("\\s+");
-            for(int i=0; i<Words.length;i++)
-            {
-             if(myLadder.find(stripPunctuation(Words[i]))!=-1)
-                {
-                myLadder.insert(stripPunctuation(Words[1]));        // TODO add your handling code here:
-                }
-            // myLadder.insert(stripPunctuation(Words[i]));
+                myLadder.insert(stripPunctuation(toSeperate));        // TODO add your handling code here:
             }
-            }while (buff.readLine()!=null);
-        } catch (IOException ex) 
-        {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
+            // myLadder.insert(stripPunctuation(Words[i]));
+            //}
+        }while (scan.hasNext());
     }
      /**
      * Method Name: stripPunctuation
